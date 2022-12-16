@@ -8,6 +8,7 @@ const dataFetchReducer = (state, action) => {
         ...state,
         isLoading: true,
         isError: false,
+        data: null,
       }
     case 'FETCH_SUCCESS':
       return {

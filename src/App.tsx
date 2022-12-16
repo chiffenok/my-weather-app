@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import { CurrentWeather } from './types/Forecast'
-import { CitiesSearch, CurrentWeatherItem } from './components'
+import { CitiesSearch, CurrentWeatherItem, LoadingWeatherItem, MessageCard } from './components'
 import useDataApi from './hooks/useDataApi'
 import Stack from '@mui/material/Stack'
 import { GeoLocation } from './types/GeoLocation'
 import GeoLocationContext from './context/GeoLocationContext'
+import { Box } from '@mui/material'
 
 // import mockCurrWeather from './mock-data/mock-curr-weather.json'
 
@@ -37,15 +38,20 @@ function App() {
     <GeoLocationContext.Provider value={geoLocation}>
       <Stack direction='column' alignItems='center' justifyContent='center' height='100vh'>
         <CitiesSearch onChange={setGeoLocation} />
-        <p>
-          Location key:{' '}
+        <Box sx={{ position: 'absolute', bottom: 0, right: 0, w: 300, p: 1 }}>
+          Location:{' '}
           {geoLocation.lat || geoLocation.lon
             ? geoLocation.lat + ',' + geoLocation.lon
             : 'No location'}
-        </p>
-        {isLoadingCurrWeather && <p>CurrWeather Loading...</p>}
-        {!isLoadingCurrWeather && isErrorCurrWeather && <p>CurrWeather Error</p>}
-        {dataCurrWeather ? <CurrentWeatherItem item={dataCurrWeather} /> : <p>Choose the city</p>}
+        </Box>
+        {isLoadingCurrWeather && <LoadingWeatherItem />}
+        {!isLoadingCurrWeather && isErrorCurrWeather && (
+          <MessageCard severity='error' text='Error loading data. Please try later' />
+        )}
+        {dataCurrWeather && !isLoadingCurrWeather && <CurrentWeatherItem item={dataCurrWeather} />}
+        {(!geoLocation.lat || !geoLocation.lon) && (
+          <MessageCard severity='info' text='Please enable geolocation' />
+        )}
       </Stack>
     </GeoLocationContext.Provider>
   )
