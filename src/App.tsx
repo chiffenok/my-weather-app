@@ -7,6 +7,8 @@ import Stack from '@mui/material/Stack'
 import { GeoLocation } from './types/GeoLocation'
 import GeoLocationContext from './context/GeoLocationContext'
 
+// import mockCurrWeather from './mock-data/mock-curr-weather.json'
+
 function App() {
   const [geoLocation, setGeoLocation] = useState<GeoLocation>({
     lat: null,
@@ -27,6 +29,10 @@ function App() {
     )
   }, [geoLocation])
 
+  // const dataCurrWeather = mockCurrWeather
+  // const isLoadingCurrWeather = false
+  // const isErrorCurrWeather = false
+
   return (
     <GeoLocationContext.Provider value={geoLocation}>
       <Stack direction='column' alignItems='center' justifyContent='center' height='100vh'>
@@ -37,7 +43,6 @@ function App() {
             ? geoLocation.lat + ',' + geoLocation.lon
             : 'No location'}
         </p>
-        <p>City: {dataCurrWeather?.name + ', ' + dataCurrWeather?.sys.country}</p>
         {isLoadingCurrWeather && <p>CurrWeather Loading...</p>}
         {!isLoadingCurrWeather && isErrorCurrWeather && <p>CurrWeather Error</p>}
         {dataCurrWeather ? <CurrentWeatherItem item={dataCurrWeather} /> : <p>Choose the city</p>}

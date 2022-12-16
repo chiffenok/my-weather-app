@@ -1,6 +1,6 @@
 {
   "coord": { "lon": -4.4635, "lat": 36.719 },
-  "weather": [{ "id": 803, "main": "Clouds", "description": "broken clouds", "icon": "04d" }],
+  "weather": [{ "id": 803, "main": "Clouds", "description": "broken clouds", "icon": "01d" }],
   "base": "stations",
   "main": {
     "temp": 14.69,
