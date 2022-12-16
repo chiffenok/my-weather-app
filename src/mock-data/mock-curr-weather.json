@@ -1,0 +1,22 @@
+{
+  "coord": { "lon": -4.4635, "lat": 36.719 },
+  "weather": [{ "id": 803, "main": "Clouds", "description": "broken clouds", "icon": "04d" }],
+  "base": "stations",
+  "main": {
+    "temp": 14.69,
+    "feels_like": 14.56,
+    "temp_min": 14.61,
+    "temp_max": 15.63,
+    "pressure": 1011,
+    "humidity": 90
+  },
+  "visibility": 10000,
+  "wind": { "speed": 2.57, "deg": 130 },
+  "clouds": { "all": 75 },
+  "dt": 1671205035,
+  "sys": { "type": 2, "id": 2010336, "country": "ES", "sunrise": 1671175423, "sunset": 1671210193 },
+  "timezone": 3600,
+  "id": 2514256,
+  "name": "Málaga",
+  "cod": 200
+}
