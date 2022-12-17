@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import { CurrentWeather } from './types/Forecast'
-import { CitiesSearch, CurrentWeatherItem, LoadingWeatherItem, MessageCard } from './components'
+import {
+  CitiesSearch,
+  CurrentWeatherItem,
+  Header,
+  LoadingWeatherItem,
+  MessageCard,
+} from './components'
 import useDataApi from './hooks/useDataApi'
-import Stack from '@mui/material/Stack'
+import { Box, Stack } from '@mui/material'
 import { GeoLocation } from './types/GeoLocation'
 import GeoLocationContext from './context/GeoLocationContext'
-import { Box } from '@mui/material'
 
 // import mockCurrWeather from './mock-data/mock-curr-weather.json'
 
@@ -36,7 +41,8 @@ function App() {
 
   return (
     <GeoLocationContext.Provider value={geoLocation}>
-      <Stack direction='column' alignItems='center' justifyContent='center' height='100vh'>
+      <Header />
+      <Stack direction='column' alignItems='center' justifyContent='center' sx={{ mt: 2 }}>
         <CitiesSearch onChange={setGeoLocation} />
         <Box sx={{ position: 'absolute', bottom: 0, right: 0, w: 300, p: 1 }}>
           Location:{' '}
