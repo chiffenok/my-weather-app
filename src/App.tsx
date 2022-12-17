@@ -12,6 +12,7 @@ import useDataApi from './hooks/useDataApi'
 import { Box, Stack } from '@mui/material'
 import { GeoLocation } from './types/GeoLocation'
 import GeoLocationContext from './context/GeoLocationContext'
+import { REACT_APP_APPID } from './config/constants'
 
 // import mockCurrWeather from './mock-data/mock-curr-weather.json'
 
@@ -26,12 +27,10 @@ function App() {
     doFetchForecast,
   ] = useDataApi<CurrentWeather | undefined>(null, undefined)
 
-  const appid = '37a7c895746a4830cc3456b2b7438659'
-
   useEffect(() => {
     if (!geoLocation.lat || !geoLocation.lon) return
     doFetchForecast(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&appid=${appid}&units=metric&cnt=5`,
+      `https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&appid=${REACT_APP_APPID}&units=metric&cnt=5`,
     )
   }, [geoLocation])
 
