@@ -1,35 +1,21 @@
 import { CircularProgress, IconButton, Tooltip } from '@mui/material'
-import React, { SetStateAction, useState } from 'react'
+import React, { SetStateAction, useEffect } from 'react'
 import { GeoLocation } from '../types/GeoLocation'
 import GpsNotFixedIcon from '@mui/icons-material/GpsNotFixed'
+import GpsFixedIcon from '@mui/icons-material/GpsFixed'
 import GpsOffIcon from '@mui/icons-material/GpsOff'
+import useGeoLocation from '../hooks/useGeoLocation'
 
 interface Props {
   onGeoLocationChange: React.Dispatch<SetStateAction<GeoLocation>>
 }
 
 const GeoLocationButton = ({ onGeoLocationChange }: Props) => {
-  const [geoLocationError, setGeoLocationError] = useState<string | null>(null)
-  const [geoLocationLoading, setGeoLocationLoading] = useState<boolean>(false)
+  const { position, geoLocationError, geoLocationLoading, getLocation } = useGeoLocation()
 
-  const getLocation = () => {
-    setGeoLocationError(null)
-    if (!navigator.geolocation) {
-      setGeoLocationError('Geolocation is not supported by your browser')
-    } else {
-      setGeoLocationLoading(true)
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setGeoLocationLoading(false)
-          onGeoLocationChange({ lat: position.coords.latitude, lon: position.coords.longitude })
-        },
-        () => {
-          setGeoLocationLoading(false)
-          setGeoLocationError('Unable to retrieve your location. Please, give permissions')
-        },
-      )
-    }
-  }
+  useEffect(() => {
+    if (position) onGeoLocationChange({ lat: position.lat, lon: position.lon })
+  }, [position])
 
   if (geoLocationLoading) return <CircularProgress />
 
@@ -44,7 +30,7 @@ const GeoLocationButton = ({ onGeoLocationChange }: Props) => {
 
   return (
     <IconButton onClick={getLocation} color='primary' aria-label='set you location'>
-      <GpsNotFixedIcon />
+      {position.lat && position.lon ? <GpsFixedIcon /> : <GpsNotFixedIcon />}
     </IconButton>
   )
 }
