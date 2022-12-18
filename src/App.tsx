@@ -13,7 +13,7 @@ import {
 import useDataApi from './hooks/useDataApi'
 import { GeoLocation } from './types/GeoLocation'
 import GeoLocationContext from './context/GeoLocationContext'
-import { REACT_APP_APPID } from './config/constants'
+import { REACT_APP_SERVER_URL } from './config/constants'
 
 function App() {
   const [geoLocation, setGeoLocation] = useState<GeoLocation>({
@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     if (!geoLocation.lat || !geoLocation.lon) return
     doFetchForecast(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&appid=${REACT_APP_APPID}&units=metric&cnt=5`,
+      `${REACT_APP_SERVER_URL}/api/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}`,
     )
   }, [geoLocation.lat, geoLocation.lon])
 
