@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { TextField, Autocomplete } from '@mui/material'
-import { REACT_APP_APPID } from '../config/constants'
+import { REACT_APP_SERVER_URL } from '../config/constants'
 import axios from 'axios'
 import { GeoLocation } from '../types/GeoLocation'
 import { Place } from '../types/Place'
@@ -23,9 +23,7 @@ const PlaceSearch = ({ onGeoLocationChange }: Props) => {
     }
 
     const getData = setTimeout(async () => {
-      const response = await axios.get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${inputValue}&limit=5&appid=${REACT_APP_APPID}`,
-      )
+      const response = await axios.get(`${REACT_APP_SERVER_URL}/api/geo?q=${inputValue}`)
 
       if (active) {
         let newOptions: readonly Place[] = []
