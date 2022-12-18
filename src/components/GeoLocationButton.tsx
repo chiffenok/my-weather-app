@@ -15,7 +15,7 @@ const GeoLocationButton = ({ onGeoLocationChange }: Props) => {
 
   useEffect(() => {
     if (position) onGeoLocationChange({ lat: position.lat, lon: position.lon })
-  }, [position])
+  }, [position.lat, position.lon])
 
   if (geoLocationLoading) return <CircularProgress />
 

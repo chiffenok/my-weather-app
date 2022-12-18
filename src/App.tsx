@@ -15,8 +15,6 @@ import { GeoLocation } from './types/GeoLocation'
 import GeoLocationContext from './context/GeoLocationContext'
 import { REACT_APP_APPID } from './config/constants'
 
-// import mockCurrWeather from './mock-data/mock-curr-weather.json'
-
 function App() {
   const [geoLocation, setGeoLocation] = useState<GeoLocation>({
     lat: null,
@@ -33,11 +31,7 @@ function App() {
     doFetchForecast(
       `https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&appid=${REACT_APP_APPID}&units=metric&cnt=5`,
     )
-  }, [geoLocation])
-
-  // const dataCurrWeather = mockCurrWeather
-  // const isLoadingCurrWeather = false
-  // const isErrorCurrWeather = false
+  }, [geoLocation.lat, geoLocation.lon])
 
   return (
     <GeoLocationContext.Provider value={geoLocation}>
@@ -60,7 +54,7 @@ function App() {
           <MessageCard severity='error' text='Error loading data. Please try later' />
         )}
         {dataCurrWeather && !isLoadingCurrWeather && <CurrentWeatherItem item={dataCurrWeather} />}
-        {(!geoLocation.lat || !geoLocation.lon) && (
+        {!isErrorCurrWeather && (!geoLocation.lat || !geoLocation.lon) && (
           <MessageCard severity='info' text='Please, choose a city or enable geolocation' />
         )}
       </Container>
