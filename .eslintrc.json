@@ -2,13 +2,15 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "jest": true // Add this line!
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:import/recommended",
+    "plugin:jsx-a11y/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "eslint-config-prettier"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
@@ -16,22 +18,23 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "react-hooks",
-    "@typescript-eslint",
-    "prettier"
-  ],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "settings": {
+    "react": {
+      "version": "detect"
+    },
     "import/resolver": {
-      "typescript": {}
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     }
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
     "camelcase": "error",
-    "spaced-comment": "error",
     "quotes": ["error", "single"],
-    "no-duplicate-imports": "error"
+    "no-duplicate-imports": "error",
+    "spaced-comment": ["error", "always", { "markers": ["/"] }]
   }
 }

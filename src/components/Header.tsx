@@ -7,11 +7,7 @@ const Header = () => (
     <Container maxWidth='sm'>
       <Toolbar>
         <TsunamiOutlinedIcon fontSize='large' />
-        <Typography
-          variant='h4'
-          component='div'
-          sx={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Pacifico' }}
-        >
+        <Typography variant='h4' component='div' sx={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Pacifico' }}>
           My Weather App
         </Typography>
       </Toolbar>

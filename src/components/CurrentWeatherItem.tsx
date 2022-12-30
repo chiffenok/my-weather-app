@@ -31,9 +31,7 @@ const CurrentWeatherItem = ({ item }: Props) => {
     </>
   )
 
-  const Description = (
-    <Typography variant='body2'>{`${cWeather.main}, ${cWeather.description}`}</Typography>
-  )
+  const Description = <Typography variant='body2'>{`${cWeather.main}, ${cWeather.description}`}</Typography>
 
   const ExtraInformation = (
     <>

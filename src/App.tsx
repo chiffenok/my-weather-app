@@ -21,10 +21,8 @@ function App() {
     lon: null,
   })
 
-  const [
-    { data: dataCurrWeather, isLoading: isLoadingCurrWeather, isError: isErrorCurrWeather },
-    doFetchForecast,
-  ] = useDataApi<CurrentWeather | undefined>(null, undefined)
+  const [{ data: dataCurrWeather, isLoading: isLoadingCurrWeather, isError: isErrorCurrWeather }, doFetchForecast] =
+    useDataApi<CurrentWeather | undefined>(null, undefined)
 
   useEffect(() => {
     if (!geoLocation.lat || !geoLocation.lon) return
@@ -42,10 +40,7 @@ function App() {
           </Stack>
         </Paper>
         <Box sx={{ position: 'absolute', bottom: 0, right: 0, w: 300, p: 1 }}>
-          Location:{' '}
-          {geoLocation.lat || geoLocation.lon
-            ? geoLocation.lat + ',' + geoLocation.lon
-            : 'No location'}
+          Location: {geoLocation.lat || geoLocation.lon ? geoLocation.lat + ',' + geoLocation.lon : 'No location'}
         </Box>
         {isLoadingCurrWeather && <LoadingWeatherItem />}
         {!isLoadingCurrWeather && isErrorCurrWeather && (
