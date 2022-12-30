@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { TextField, Autocomplete } from '@mui/material'
-import { REACT_APP_SERVER_URL } from '../config/constants'
+import { VITE_SERVER_URL } from '../config/constants'
 import axios from 'axios'
 import { GeoLocation } from '../types/GeoLocation'
 import { Place } from '../types/Place'
@@ -23,7 +23,7 @@ const PlaceSearch = ({ onGeoLocationChange }: Props) => {
     }
 
     const getData = setTimeout(async () => {
-      const response = await axios.get(`${REACT_APP_SERVER_URL}/api/geo?q=${inputValue}`)
+      const response = await axios.get(`${VITE_SERVER_URL}/api/geo?q=${inputValue}`)
 
       if (active) {
         let newOptions: readonly Place[] = []
