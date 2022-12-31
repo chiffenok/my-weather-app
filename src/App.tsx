@@ -14,8 +14,12 @@ import useDataApi from './hooks/useDataApi'
 import { GeoLocation } from './types/GeoLocation'
 import GeoLocationContext from './context/GeoLocationContext'
 import { VITE_SERVER_URL } from './config/constants'
+import type { RootState } from './redux/store'
+import { useSelector } from 'react-redux'
 
 function App() {
+  const location = useSelector((state: RootState) => state.location.location)
+
   const [geoLocation, setGeoLocation] = useState<GeoLocation>({
     lat: null,
     lon: null,
@@ -39,8 +43,10 @@ function App() {
             <GeoLocationButton onGeoLocationChange={setGeoLocation} />
           </Stack>
         </Paper>
-        <Box sx={{ position: 'absolute', bottom: 0, right: 0, w: 300, p: 1 }}>
-          Location: {geoLocation.lat || geoLocation.lon ? geoLocation.lat + ',' + geoLocation.lon : 'No location'}
+        <Box sx={{ position: 'absolute', bottom: 0, right: 0, w: 300, p: 1, textAlign: 'right' }}>
+          Location: {geoLocation.lat || geoLocation.lon ? geoLocation.lat + ',' + geoLocation.lon : 'No location'}{' '}
+          <br />
+          Location from Redux:{location.lat},{location.lon}
         </Box>
         {isLoadingCurrWeather && <LoadingWeatherItem />}
         {!isLoadingCurrWeather && isErrorCurrWeather && (
